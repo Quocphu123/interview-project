@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import SearchInput from "./Components/SearchInput";
+import ProductList from "./Components/ProductList";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+const queryClient = new QueryClient();
 
 function App() {
+  const [searchProduct, setSearchProduct] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="bg-[#F0E7FD] h-screen flex items-center justify-center">
+        <div className=" bg-[#FFFFFF] p-6 shadow-[0px_0px_4px_0px_#052B611F] rounded-3xl w-[528px] h-[880px]">
+          <SearchInput
+            setSearchProduct={setSearchProduct}
+            searchProduct={searchProduct}
+          />
+          <ProductList searchProduct={searchProduct} />
+        </div>
+      </div>
+    </QueryClientProvider>
   );
 }
 
